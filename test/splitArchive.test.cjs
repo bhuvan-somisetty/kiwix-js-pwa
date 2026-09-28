@@ -101,4 +101,10 @@ describe('isPartOfArchive (#983)', function () {
         assert.equal(isPartOfArchive('c++_en.zim', 'cc_en.zim'), false);
         assert.equal(isPartOfArchive('notes (1).zim', 'notes (1).zim'), true);
     });
+
+    it('distinguishes a duplicate download with parentheses from the original archive', function () {
+        const folder = ['foo.zim', 'foo (1).zim'];
+        assert.deepEqual(partsOf('foo.zim', folder), ['foo.zim']);
+        assert.deepEqual(partsOf('foo (1).zim', folder), ['foo (1).zim']);
+    });
 });
